@@ -62,44 +62,45 @@ def qa_bot():
 def final_result(query):
     qa_result = qa_bot()
     response = qa_result({'query': query})
+    # print("RESPONSE: ",response)
     return response
 
-#chainlit code
-@cl.on_chat_start
-async def start():
-    chain = qa_bot()
-    msg = cl.Message(content="Starting the bot...")
-    await msg.send()
-    msg.content = "Hi, Welcome to Medical Bot. What is your query?"
-    await msg.update()
+# #chainlit code
+# @cl.on_chat_start
+# async def start():
+#     chain = qa_bot()
+#     msg = cl.Message(content="Starting the bot...")
+#     await msg.send()
+#     msg.content = "Hi, Welcome to Medical Bot. What is your query?"
+#     await msg.update()
 
-    cl.user_session.set("chain", chain)
+#     cl.user_session.set("chain", chain)
 
-@cl.password_auth_callback
-def auth_callback(username: str, password: str):
-  # Fetch the user matching username from your database
-  # and compare the hashed password with the value stored in the database
-  if (username, password) == ("admin", "admin"):
-    return cl.AppUser(username="admin", role="ADMIN", provider="credentials")
-  else:
-    return None
+# @cl.password_auth_callback
+# def auth_callback(username: str, password: str):
+#   # Fetch the user matching username from your database
+#   # and compare the hashed password with the value stored in the database
+#   if (username, password) == ("admin", "admin"):
+#     return cl.AppUser(username="admin", role="ADMIN", provider="credentials")
+#   else:
+#     return None
 
-# cl_GS9AcuXhPOj/aaQuElBu/qFD0+hQ2Ze1W8TWU2LmwDI=
-@cl.on_message
-async def main(message):
-    chain = cl.user_session.get("chain") 
-    cb = cl.AsyncLangchainCallbackHandler(
-        stream_final_answer=True, answer_prefix_tokens=["FINAL", "ANSWER"]
-    )
-    cb.answer_reached = True
-    res = await chain.acall(message, callbacks=[cb])
-    answer = res["result"]
-    sources = res["source_documents"]
+# # cl_GS9AcuXhPOj/aaQuElBu/qFD0+hQ2Ze1W8TWU2LmwDI=
+# @cl.on_message
+# async def main(message):
+#     chain = cl.user_session.get("chain") 
+#     cb = cl.AsyncLangchainCallbackHandler(
+#         stream_final_answer=True, answer_prefix_tokens=["FINAL", "ANSWER"]
+#     )
+#     cb.answer_reached = True
+#     res = await chain.acall(message, callbacks=[cb])
+#     answer = res["result"]
+#     sources = res["source_documents"]
 
-    if sources:
-        answer += f"\nSources:" + str(sources)
-    else:
-        answer += "\nNo sources found"
+#     if sources:
+#         answer += f"\nSources:" + str(sources)
+#     else:
+#         answer += "\nNo sources found"
 
-    await cl.Message(content=answer).send()
+#     await cl.Message(content=answer).send()
 
