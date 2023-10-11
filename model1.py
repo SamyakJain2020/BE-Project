@@ -57,12 +57,13 @@ def qa_bot():
     qa = retrieval_qa_chain(llm, qa_prompt, db)
 
     return qa
-
+global qa_result
+def launch():
+    qa_result= qa_bot()
+    return qa_result
 #output function
 def final_result(query):
-    qa_result = qa_bot()
     response = qa_result({'query': query})
-    # print("RESPONSE: ",response)
     return response
 
 # #chainlit code

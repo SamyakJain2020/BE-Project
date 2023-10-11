@@ -47,32 +47,32 @@ def check_user():
 		else:
 			return True, user_data["name"]
 		
-def query():
-	if request.method == 'POST':
-		query = request.form['query']
-		response = model1.final_result(query)
-		# print(response['result'])
-		documents = response["source_documents"]
-		extracted_data = []
+# def query():
+# 	if request.method == 'POST':
+# 		query = request.form['query']
+# 		response = model1.final_result(query)
+# 		# print(response['result'])
+# 		documents = response["source_documents"]
+# 		extracted_data = []
 
-	for document in documents:
-		doc_content = document.page_content
-		doc_source = document.metadata['source']
-		doc_page = document.metadata['page']
+# 	for document in documents:
+# 		doc_content = document.page_content
+# 		doc_source = document.metadata['source']
+# 		doc_page = document.metadata['page']
 		
-		extracted_data.append({
-			'content': doc_content,
-			'source': doc_source,
-			'page': doc_page
-		})
-	# Convert the extracted data to JSON
-	json_data = json.dumps(extracted_data, indent=4)
-	ans ={
-			"query": query,
-			"result": response['result'],
-			# "source_documents": response['source_documents']['page_content'],
-			"metadata":json_data
-			# "page":status["page"],
-		}
-	# save ans in db match it with email ?
-	return ans
+# 		extracted_data.append({
+# 			'content': doc_content,
+# 			'source': doc_source,
+# 			'page': doc_page
+# 		})
+# 	# Convert the extracted data to JSON
+# 	json_data = json.dumps(extracted_data, indent=4)
+# 	ans ={
+# 			"query": query,
+# 			"result": response['result'],
+# 			# "source_documents": response['source_documents']['page_content'],
+# 			"metadata":json_data
+# 			# "page":status["page"],
+# 		}
+# 	# save ans in db match it with email ?
+# 	return ans
