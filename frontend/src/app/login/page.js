@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import img1 from './signin-image.jpg';
 import Navber from '../navbar';
 import Footer from '../footer';
+import { Input, TextInput } from '@mantine/core';
 const Page = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loginMessage, setLoginMessage] = useState('');
@@ -73,6 +74,20 @@ const Page = () => {
                   className="register-form"
                   id="login-form"
                 >
+                  {/* <TextInput
+                    mt="xl"
+                    label="Custom layout"
+                    placeholder="Custom layout"
+                    description="Error and description are"
+                    error="both below the input"
+                    inputWrapperOrder={[
+                      'label',
+                      'input',
+                      'description',
+                      'error',
+                    ]}
+                  /> */}
+
                   <div className="form-group">
                     <label htmlFor="your_email">
                       <i className="zmdi zmdi-account material-icons-name"></i>

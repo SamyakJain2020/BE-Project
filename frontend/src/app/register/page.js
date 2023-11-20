@@ -55,7 +55,7 @@ const Register = () => {
   return (
     <>
       <Navber />
-      <div className="main h-full">
+      <div className="main ">
         <section className="signup">
           <div className="container">
             <div className="signup-content">
@@ -171,8 +171,8 @@ const Register = () => {
             </div>
           </div>
         </section>
-        <Footer />
       </div>
+      <Footer />
     </>
   );
 };
