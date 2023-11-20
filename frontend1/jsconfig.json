@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@Register/*": [
+        "./src/app/Register/*"
+      ] // Add the correct path for the missing file
+    }
+  }
+}
+//   "compilerOptions": {
+//     "paths": {
+//       "@/*": ["./src/*"],
+//       "@Register/*": ["./src/app/Register/*"]
+//     }
+//   }
+// }
+//   "compilerOptions": {
+//     "paths": {
+//       "@/*": ["./src/*"]
+//     }
+//   }
+// }
