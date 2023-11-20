@@ -1,7 +1,4 @@
-// import { fetchEventSource } from "@fortaine/fetch-event-source";
 import { useState, useMemo } from "react";
-// import { appConfig } from "../../config.browser";
-
 const API_PATH = "localhost:5000/ask";
 interface ChatMessage {
   role: "user" | "assistant";
@@ -58,23 +55,24 @@ export function useChat() {
 
     setChatHistory(newHistory);
     const body = JSON.stringify({
-      // Only send the most recent messages. This is also
-      // done in the serverless function, but we do it here
-      // to avoid sending too much data
       messages: newHistory.slice(-8),
     });
 
-    // This is like an EventSource, but allows things like
-    // POST requests and headers
-    
-    let myHeaders = new Headers();
-    myHeaders.append('Access-Control-Allow-Origin', 'http://localhost:5000');
-    myHeaders.append('Access-Control-Allow-Credentials', 'true');
-    myHeaders.append("Content-Type", "application/json");
+//TODO: IMPLEMENTATION TODO
 
-let raw = JSON.stringify({
-  "query": "What is Blood ?"
-});
+};
+
+
+//TODO: IMPLEMENTATION TODO
+let query = (message:string) => {
+  let raw = JSON.stringify({
+    "query":message
+  });
+
+let myHeaders = new Headers();
+myHeaders.append('Access-Control-Allow-Origin', 'http://localhost:5000');
+myHeaders.append('Access-Control-Allow-Credentials', 'true');
+myHeaders.append("Content-Type", "application/json");
 
 let requestOptions = {
   method: 'POST',
@@ -82,6 +80,8 @@ let requestOptions = {
   body: raw,
   redirect: 'follow'
 };
+    
+
   console.log("FETCHING");
 fetch("http://127.0.0.1:5000/ask", {
   method: 'POST',
@@ -98,54 +98,7 @@ fetch("http://127.0.0.1:5000/ask", {
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 
-
-
-
-  //   fetchEventSource(API_PATH, {
-  //     body,
-  //     method: "POST",
-  //     signal: abortController.signal,
-  //     onclose: () => {
-  //       setState("idle");
-  //     },
-  //     onmessage: (event) => {
-  //       switch (event.event) {
-  //         case "delta": {
-  //           // This is a new word or chunk from the AI
-  //           setState("loading");
-  //           const message = JSON.parse(event.data);
-  //           if (message?.role === "assistant") {
-  //             chatContent = "";
-  //             return;
-  //           }
-  //           if (message.content) {
-  //             chatContent += message.content;
-  //             setCurrentChat(chatContent);
-  //           }
-  //           break;
-  //         }
-  //         case "open": {
-  //           // The stream has opened and we should recieve
-  //           // a delta event soon. This is normally almost instant.
-  //           setCurrentChat("...");
-  //           break;
-  //         }
-  //         case "done": {
-  //           // When it's done, we add the message to the history
-  //           // and reset the current chat
-  //           setChatHistory((curr) => [
-  //             ...curr,
-  //             { role: "assistant", content: chatContent } as const,
-  //           ]);
-  //           setCurrentChat(null);
-  //           setState("idle");
-  //         }
-  //         default:
-  //           break;
-  //       }
-  //     },
-  //   });
-  };
+}
 
   return { sendMessage, currentChat, chatHistory, cancel, clear, state };
 }

@@ -1,22 +1,7 @@
 'use client';
-// import {
-//   FunctionComponent,
-//   DetailedHTMLProps,
-//   TableHTMLAttributes,
-// } from 'react';
+
 import ReactMarkdown from 'react-markdown';
-// import { ReactMarkdownProps } from 'react-markdown/lib/complex-types';
 import remarkGfm from 'remark-gfm';
-
-// interface ChatMessage {
-//   role: 'user' | 'assistant';
-//   content: string;
-// }
-// interface Props {
-//   message: ChatMessage;
-// }
-
-// This lets us style any markdown tables that are rendered
 const CustomTable = ({ children, ...props }) => {
   return (
     <div className="overflow-x-auto">
@@ -26,11 +11,6 @@ const CustomTable = ({ children, ...props }) => {
     </div>
   );
 };
-
-/**
- * This component renders a single chat message. It is rendered according to
- * whether it isa  message from the assistant or the user.
- */
 
 export const ChatMessage = ({ message }) =>
   message.role === 'user' ? (
