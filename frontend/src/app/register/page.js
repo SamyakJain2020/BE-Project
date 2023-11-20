@@ -43,7 +43,7 @@ const Register = () => {
           }, 3000);
         } else {
           setErrorMessage('Email ID already exists.');
-          setTimeout(() => setErrorMessage(''), 3000);
+          setTimeout(() => setErrorMessage('Error'), 3000);
         }
       } catch (error) {
         console.error('Error:', error);
