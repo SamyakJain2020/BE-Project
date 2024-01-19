@@ -14,12 +14,12 @@ export default function Home() {
     return { content: currentChat ?? '', role: 'assistant' };
   }, [currentChat]);
   const bottomRef = useRef(null);
-  useEffect(() => {
-    scrollToBottom();
-  }, [currentChat, chatHistory, state]);
-  const scrollToBottom = () => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [currentChat, chatHistory, state]);
+  // const scrollToBottom = () => {
+  //   bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  // };
   const inputRef = useRef(null);
   const focusInput = () => {
     inputRef.current?.focus();
@@ -42,8 +42,8 @@ export default function Home() {
                   </h1>
                   <p>
                     I am a chatbot that can help you find information about
-                    medicines. I can also help you find your nearest pharmacy. I
-                    am still learning, so please be patient with me.
+                    medicines. I am still learning, so please be patient with
+                    me.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -73,7 +73,7 @@ export default function Home() {
               ))
             )}
 
-            {currentChat ? <ChatMessage message={currentMessage} /> : null}
+            {/* {currentChat ? <ChatMessage message={currentMessage} /> : null} */}
           </div>
 
           <div ref={bottomRef} />
@@ -93,7 +93,9 @@ export default function Home() {
             className="flex"
             onSubmit={(e) => {
               e.preventDefault();
+              console.log('messgae = ', message);
               sendMessage(message, chatHistory);
+              console.log('chatHistory = ', chatHistory);
               setMessage('');
             }}
           >
